@@ -76,9 +76,14 @@ public class LimpiezaDimFecha {
 			writer.close();
 			br.close();
 			
+			//fact table uso de una sala
+			Hashtable <String,Integer>cuantosEquipos = new Hashtable<String,Integer>();
+			cuantosEquipos.put("waira 1", 47);
+			cuantosEquipos.put("waira 2", 30);
+			cuantosEquipos.put("turing", 39);
 			
 			File fileHistorialOcupacion = new File("./data/datos/historial_ocupacion.csv");
-			File fileHistorialOcupacionBien = new File("./data/datosProcesados/historialOcupacionF.txt");
+			File fileHistorialOcupacionBien = new File("./data/datosProcesados/UsoDeUnaSala.txt");
 			PrintWriter writer2 = new PrintWriter(fileHistorialOcupacionBien, "UTF-8");
 			    
 		    BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(fileHistorialOcupacion)));
@@ -86,7 +91,7 @@ public class LimpiezaDimFecha {
 		    int primero2 =1;
 		    while ((line2) != null) {
 		    	if(primero2 ==1){
-		    		primero2++; writer2.println("sala,ocupacion,dia,mes,año,hora,minuto,diaLenguajeNatural,semana");
+		    		primero2++; writer2.println("sala,numEquipos,PorcentajeOcupacion,dia,mes,año,hora,minuto,diaLenguajeNatural,semana");
 		    	}else{
 			        String [] campos = line2.split(";");
 			        String fecha = campos[0];
@@ -106,7 +111,9 @@ public class LimpiezaDimFecha {
 				        }
 				        else{semana = -1;}
 				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "yyyy-MM-dd");
-			        	writer2.println(campos[1]+","+campos[2]+","+dia+","+mes+","+año+","+hora+","+minuto+","+diaLengNat+","+semana);		        	
+				        int numEquipos = cuantosEquipos.get(campos[1]);
+				        double ocupados =Double.parseDouble(campos[2]);
+			        	writer2.println(campos[1]+","+numEquipos+","+(ocupados/numEquipos)+","+dia+","+mes+","+año+","+hora+","+minuto+","+diaLengNat+","+semana);		        	
 			        }
 		    	}
 		    	line2  = br2.readLine();
