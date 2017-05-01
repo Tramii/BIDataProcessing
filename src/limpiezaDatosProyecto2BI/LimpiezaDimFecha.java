@@ -20,8 +20,8 @@ public class LimpiezaDimFecha {
 		//#Semana = (#día + posInicioMes)/7   Si semana -1 => semana fuera de dias de clase o examenes
 		
 		posInicioMes2016 = new Hashtable();
-		posInicioMes2016.put(1, 0);
-		posInicioMes2016.put(2,13); //1 feb= pos 13+dia 1 = 14 
+		posInicioMes2016.put(1, -18);//18 enero= pos -18 + dia 18 = 0 = primer dia
+		posInicioMes2016.put(2,(13)); //1 feb= pos 13+dia 1 = 14 
 		posInicioMes2016.put(3,(13+29)); //marzo
 		posInicioMes2016.put(4,(13+29+31)); //abril
 		posInicioMes2016.put(5,(13+29+31+30));  //mayo
@@ -63,7 +63,7 @@ public class LimpiezaDimFecha {
 				        if(Integer.parseInt(mes) < 6 || (Integer.parseInt(mes) >=8 && Integer.parseInt(mes)<12) ){
 				        	semana = (((Integer)posInicioMes2016.get(Integer.parseInt(mes)))
 					        		+Integer.parseInt(dia))/7;
-				        	System.out.println(semana + "    mes: "+mes+"   dia"+dia);
+				        	semana++;
 				        }
 				        else{semana = -1;}
 				        
@@ -102,6 +102,7 @@ public class LimpiezaDimFecha {
 				        if(Integer.parseInt(mes) < 6 || (Integer.parseInt(mes) >=8 && Integer.parseInt(mes)<12) ){
 				        	semana = (((Integer)posInicioMes2016.get(Integer.parseInt(mes)))
 					        		+Integer.parseInt(dia))/7;
+				        	semana++;
 				        }
 				        else{semana = -1;}
 				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "YYYY-MM-DD");
