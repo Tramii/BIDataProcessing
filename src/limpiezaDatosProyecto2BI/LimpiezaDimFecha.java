@@ -67,7 +67,7 @@ public class LimpiezaDimFecha {
 				        }
 				        else{semana = -1;}
 				        
-				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "YYYY-MM-DD");
+				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "yyyy-MM-dd");
 			        	writer.println(campos[0]+","+campos[1]+","+dia+","+mes+","+año+","+hora+","+minuto+","+diaLengNat+","+semana);		        	
 			        }
 		    	}
@@ -105,7 +105,7 @@ public class LimpiezaDimFecha {
 				        	semana++;
 				        }
 				        else{semana = -1;}
-				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "YYYY-MM-DD");
+				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "yyyy-MM-dd");
 			        	writer2.println(campos[1]+","+campos[2]+","+dia+","+mes+","+año+","+hora+","+minuto+","+diaLengNat+","+semana);		        	
 			        }
 		    	}
@@ -123,6 +123,7 @@ public class LimpiezaDimFecha {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //System.out.println(inputDate+"          "+date.toString());
         return new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
     }
 	public static void main(String[] args) {
