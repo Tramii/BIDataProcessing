@@ -38,7 +38,7 @@ public class LimpiezaDimFecha {
 	public void leerYProcesar(){
 		try{
 			// solo hay que separar
-			File fileHistorialBien = new File("./data/datosProcesados/historialF.txt");
+			File fileHistorialBien = new File("./data/datosProcesados/usoDeUnaMaquina.txt");
 			PrintWriter writer = new PrintWriter(fileHistorialBien, "UTF-8");
 			    
 			File fileHistorial = new File("./data/datos/historial.csv");
@@ -47,7 +47,7 @@ public class LimpiezaDimFecha {
 		    int primero =1;
 		    while ((line) != null) {
 		    	if(primero ==1){
-		    		primero++; writer.println("usuario,equipo,dia,mes,año,hora,minuto,diaLenguajeNatural,semana");
+		    		primero++; writer.println("usuario,sala,idEquipo,dia,mes,año,hora,minuto,diaLenguajeNatural,semana");
 		    	}else{
 			        String [] campos = line.split(";");
 			        String fecha = campos[2];
@@ -66,9 +66,11 @@ public class LimpiezaDimFecha {
 				        	semana++;
 				        }
 				        else{semana = -1;}
-				        
+				        String idEquipo =campos[1];
+				        String sala = idEquipo.startsWith("ISC2")? "waira 1":
+				        	(idEquipo.startsWith("ISC3")? "waira 2":"turing");
 				        String diaLengNat=dayName(año+"-"+mes+"-"+dia, "yyyy-MM-dd");
-			        	writer.println(campos[0]+","+campos[1]+","+dia+","+mes+","+año+","+hora+","+minuto+","+diaLengNat+","+semana);		        	
+			        	writer.println(campos[0]+","+sala+","+idEquipo+","+dia+","+mes+","+año+","+hora+","+minuto+","+diaLengNat+","+semana);		        	
 			        }
 		    	}
 		    	line  = br.readLine();
